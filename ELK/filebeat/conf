@@ -1,0 +1,19 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/*.log
+#  multiline:
+ #   pattern: '^\\['
+  #  negate: true
+   # match: after
+
+output.elasticsearch:
+  hosts: ["54.158.110.46:9200"]
+  username: "elastic"
+  password: "changeme"
+
+setup.kibana:
+  host: "54.158.110.46:5601"
+  username: "elastic"
+  password: "changeme"

@@ -1,0 +1,51 @@
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+
+
+sudo -u postgres psql
+
+CREATE USER sonar WITH ENCRYPTED PASSWORD 'sonarpassword';
+CREATE DATABASE sonarqube OWNER sonar;
+
+\q
+
+sudo apt install openjdk-11-jdk
+
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.1.0.47736.zip
+sudo unzip sonarqube-9.1.0.47736.zip -d /opt
+sudo ln -s /opt/sonarqube-9.1.0.47736 /opt/sonarqube
+
+
+sudo nano /opt/sonarqube/conf/sonar.properties
+
+sonar.jdbc.username=sonar
+sonar.jdbc.password=sonarpassword
+sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+
+sudo useradd -m -U -r -s /bin/false sonarqubeuser
+
+sudo chown -R sonarqubeuser:sonarqubeuser /opt/sonarqube-9.1.0.47736
+
+sudo nano /opt/sonarqube-9.1.0.47736/conf/sonar.properties
+
+sudo nano /opt/sonarqube-9.1.0.47736/conf/sonar.properties
+----
+sonar.jdbc.username=sonar
+sonar.jdbc.password=sonarpassword
+sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+
+sonar.web.javaAdditionalOpts=-server
+sonar.web.host=0.0.0.0
+sonar.web.port=9000
+sonar.search.javaOpts=-Xmx512m -Xms512m -XX:+HeapDumpOnOutOfMemoryError
+------
+
+
+
+sonar 4.3 must be used in plugunns
+
+sudo -u sonarqubeuser /opt/sonarqube-9.1.0.47736/bin/linux-x86-64/sonar.sh restart
+sudo -u sonarqubeuser /opt/sonarqube-9.1.0.47736/bin/linux-x86-64/sonar.sh status
+
+
+update users set crypted_password='100000$t2h8AtNs1AlCHuLobDjHQTn9XppwTIx88UjqUm4s8RsfTuXQHSd/fpFexAnewwPsO6jGFQUv/24DnO55hY6Xew==', salt='k9x9eN127/3e/hf38iNiKwVfaVk=', hash_method='PBKDF2', reset_password='true', user_local='true' where login='admin';

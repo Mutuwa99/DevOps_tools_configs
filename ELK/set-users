@@ -1,0 +1,2 @@
+1.log in to elastic container
+2.bin/elasticsearch-setup-passwords interactive

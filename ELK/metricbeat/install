@@ -1,0 +1,17 @@
+# Import the Elastic Stack GPG key
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+# Add the Elastic Stack APT repository
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+
+# Update the package index
+sudo apt update
+
+# Install Metricbeat
+sudo apt install -y metricbeat
+
+# Configure Metricbeat to start on boot
+sudo systemctl enable metricbeat
+
+# Start Metricbeat
+sudo systemctl start metricbeat

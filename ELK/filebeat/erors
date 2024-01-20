@@ -1,0 +1,5 @@
+-----failing to send logs
+1.stop
+2.filebeat -e -c /etc/filebeat/filebeat.yml -d "*"
+rm -rf /var/lib/filebeat/registry
+start

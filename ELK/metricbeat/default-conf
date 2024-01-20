@@ -1,0 +1,21 @@
+  GNU nano 6.2                                                        /etc/metricbeat/metricbeat.yml                                                                  
+  metricsets:
+    - cpu
+    - load
+    - memory
+    - network
+    - process
+    - socket
+    - uptime
+  enabled: true
+  period: 10s
+
+output.elasticsearch:
+  hosts: ["54.158.110.46:9200"]
+  username: "elastic"
+  password: "changeme"
+
+setup.kibana:
+  host: "54.158.110.46:5601"
+  username: "elastic"
+  password: "changeme"
